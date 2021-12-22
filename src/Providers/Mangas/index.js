@@ -1,13 +1,15 @@
 import { createContext, useState } from "react";
-import axios from "axios";
+
 import api from "../../services";
 
 export const MangaContext = createContext();
 
 export const MangaProvider = ({ children }) => {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState([]);
   const [manga, setManga] = useState([]);
-
+  const [chapters, setChapters] = useState([]);
+  const [url, setUrl] = useState("");
+  const [data, setData] = useState([]);
   const log = (payload) => {
     console.log(payload);
 
@@ -24,41 +26,44 @@ export const MangaProvider = ({ children }) => {
   const getManga = () => {
     console.log("mangas");
     api
-      .get("/manga")
+      .get("/manga?ids[]=4f3bcae4-2d96-4c9d-932c-90181d9c873e")
       .then((res) => {
+        setManga(res.data.data);
         console.log(res);
-
-        setManga(res.data);
+        setManga(res.data.data);
       })
       .catch((err) => console.log(err));
   };
 
-  const getMangaList = () => {
+  const getMangaList = (id) => {
     console.log("list");
     api
-      .get("manga/da78c294-0430-4f9f-b52c-9b8ed45f863a/aggregate")
+      .get(`manga/${id}/aggregate`)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setChapters(res.data.volumes.none.chapters);
       })
       .catch((err) => console.log(err));
   };
 
-  const getMangaChapter = () => {
+  const getMangaChapter = (chapterId) => {
     console.log("chapter");
     api
-      .get("chapter/213ebeb5-d498-4fb1-be11-f7a034de5e9f")
+      .get(`chapter/${chapterId}`)
       .then((res) => {
         console.log(res);
+        setData(res.data.data);
       })
       .catch((err) => console.log(err));
   };
 
-  const getMangaPage = () => {
+  const getMangaPage = (id) => {
     console.log("page");
     api
-      .get("at-home/server/213ebeb5-d498-4fb1-be11-f7a034de5e9f")
+      .get(`at-home/server/${id}`)
       .then((res) => {
         console.log(res);
+        setUrl(res.data.baseUrl);
       })
       .catch((err) => console.log(err));
   };
@@ -73,6 +78,10 @@ export const MangaProvider = ({ children }) => {
         getMangaList,
         getMangaChapter,
         getMangaPage,
+        manga,
+        chapters,
+        url,
+        data,
       }}
     >
       {children}

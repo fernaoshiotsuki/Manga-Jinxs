@@ -1,17 +1,25 @@
 import axios from "axios";
-import { useContext } from "react/cjs/react.development";
+import { useContext, useState } from "react/";
 import { MangaContext } from "../Providers/Mangas";
-
+import { useEffect } from "react";
+import Image from "./displayPage";
+import Home from "../pages/home";
+import { useHistory } from "react-router-dom/";
 const Manga = () => {
+  const history = useHistory();
   const {
     getManga,
-    manga,
-    token,
     getMangaList,
     getMangaChapter,
     getMangaPage,
+    manga,
+    chapters,
+    url,
+    data,
   } = useContext(MangaContext);
-
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState("");
+  const [num, setNum] = useState(0);
   const imgURL = () => {
     axios
       .get(
@@ -23,18 +31,64 @@ const Manga = () => {
       .catch((err) => console.log(err));
   };
 
+  const testURL = (num) => {
+    console.log(num);
+    axios
+      .get(`${url}/data/${data.attributes.hash}/${data.attributes.data[num]}`)
+      .then((res) => {
+        console.log(res.config.url);
+        setPage(res.config.url);
+      })
+      .catch((err) => console.log(err));
+    console.log(
+      `${url}data/${data.attributes.hash}/${data.attributes.data[1]}`
+    );
+    handlePage();
+  };
+
+  const mangaSelect = () => {
+    const list = manga?.map((item) => {
+      return item.id;
+    });
+    setSelected(list);
+    console.log(list);
+    return list;
+  };
+
+  const chapterSelect = () => {
+    const IdArray = [];
+    for (let info in chapters) {
+      console.log(chapters[info].id);
+      IdArray.push(chapters[info].id);
+    }
+    return IdArray;
+  };
+  useEffect(() => {
+    mangaSelect();
+  }, []);
+  const handlePage = () => {
+    setNum(num + 1);
+  };
+
+  console.log(manga);
+  console.log(chapters[3]?.id);
+  console.log(selected);
+  console.log(data);
+  console.log(url);
+
   return (
     <>
       <div></div>
       <button onClick={() => getManga()}>view</button>
-      <button onClick={() => getMangaList()}>List</button>
-      <button onClick={() => getMangaChapter()}>List</button>
-
-      <button onClick={() => getMangaPage()}>List</button>
-      <button onClick={() => imgURL()}>List</button>
-      <a href="https://uploads.mangadex.org/${token}/data/d6f1b177e76eab0b010abcae75f58e50/1-de47e09e245d95ac2829bbd3e199fe1d9381092fc33616136e2584e6a3cda3dc.jpg">
-        aaaaaaa
-      </a>
+      <button onClick={() => mangaSelect()}>Select</button>
+      <button onClick={() => getMangaList(selected[5])}>List</button>
+      <button onClick={() => chapterSelect()}>chapterId</button>
+      <button onClick={() => getMangaChapter(chapters[3].id)}>Chapter</button>
+      <button onClick={() => testURL(num)}>urltest</button>
+      <button onClick={() => getMangaPage(data.id)}>page</button>
+      <button onClick={() => imgURL()}>URL</button>
+      <button onClick={() => handlePage()}>next</button>
+      <button onClick={() => history.push("/manga")}>manga page</button>
     </>
   );
 };

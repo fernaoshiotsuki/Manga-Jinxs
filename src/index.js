@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { MangaProvider } from "./Providers/Mangas";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <MangaProvider>
-      <App />
-    </MangaProvider>
+    <BrowserRouter>
+      <MangaProvider>
+        <App />
+      </MangaProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
