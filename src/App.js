@@ -8,22 +8,20 @@ import MangaReader from "./pages/DisplayChapter";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Switch>
-          <Route exact path="/">
-            <Manga />
-          </Route>
-          <Route exact path="/manga">
-            <Home />
-          </Route>
-          <Route exact path="/manga/chapters">
-            <ChaptersList />
-          </Route>
-          <Route exact path="/manga/reader">
-            <MangaReader />
-          </Route>
-        </Switch>
-      </header>
+      <Switch>
+        <Route exact path="/">
+          <Manga />
+        </Route>
+        <Route exact path="/manga">
+          <Home />
+        </Route>
+        <Route exact path="/manga/chapters">
+          <ChaptersList />
+        </Route>
+        <Route exact path="/manga/reader">
+          <MangaReader />
+        </Route>
+      </Switch>
     </div>
   );
 }

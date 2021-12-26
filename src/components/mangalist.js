@@ -2,9 +2,10 @@ import axios from "axios";
 import { useContext, useState } from "react/";
 import { MangaContext } from "../Providers/Mangas";
 import { useEffect } from "react";
-import Image from "./displayPage";
-import Home from "../pages/home";
+
 import { useHistory } from "react-router-dom/";
+import { StyledHeader } from "./Header/styles";
+import { StyledFooter, StyledMain } from "./styles";
 const Manga = () => {
   const history = useHistory();
   const {
@@ -76,20 +77,35 @@ const Manga = () => {
   console.log(data);
   console.log(url);
 
+  useEffect(() => {
+    getManga();
+  }, []);
+
   return (
     <>
-      <div></div>
-      <button onClick={() => getManga()}>view</button>
-      <button onClick={() => mangaSelect()}>Select</button>
-      <button onClick={() => getMangaList(selected[5])}>List</button>
-      <button onClick={() => chapterSelect()}>chapterId</button>
-      <button onClick={() => getMangaChapter(chapters[3].id)}>Chapter</button>
-      <button onClick={() => testURL(num)}>urltest</button>
-      <button onClick={() => getMangaPage(data.id)}>page</button>
-      <button onClick={() => imgURL()}>URL</button>
-      <button onClick={() => handlePage()}>next</button>
-      <button onClick={() => history.push("/manga")}>manga page</button>
+      <StyledHeader>
+        <h2>Manga Jinxs</h2>
+        <h4>Don't jinx it.</h4>
+      </StyledHeader>
+
+      <StyledMain>
+        <p>
+          Os melhores mangas da revista Shounen Jump, escolhidos a dedo para
+          você.
+        </p>
+        <img src="https://tenor.com/view/jinx-arcane-arcane-jinx-gif-24130225.gif"></img>
+        <button onClick={() => history.push("/manga")}>
+          Visualizar Mangas
+        </button>
+      </StyledMain>
+
+      <StyledFooter>
+        <p>@Shiotsuki-2021</p>
+      </StyledFooter>
     </>
   );
 };
 export default Manga;
+/* <div>
+          <img src="https://tenor.com/view/jinx-jamming-gif-24016964.gif"></img>
+        </div> */

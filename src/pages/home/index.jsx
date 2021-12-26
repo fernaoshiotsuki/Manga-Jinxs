@@ -4,6 +4,7 @@ import { useState } from "react/cjs/react.development";
 
 import Image from "../../components/displayPage";
 import { MangaContext } from "../../Providers/Mangas";
+import { StyledDiv } from "./styles";
 const Home = () => {
   const { manga } = useContext(MangaContext);
   const [coversState, setCoversState] = useState(false);
@@ -43,6 +44,6 @@ const Home = () => {
     }
   };
 
-  return <div>{coversState && <Image payload={images} />}</div>;
+  return <StyledDiv>{coversState && <Image payload={images} />}</StyledDiv>;
 };
 export default Home;
