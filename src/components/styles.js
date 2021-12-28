@@ -4,7 +4,6 @@ export const StyledMain = styled.main`
   height: 80vh;
   width: 100vw;
   img {
-    opacity: 0.6;
     height: 100%;
     width: 100%;
     background-image: initial;
@@ -33,7 +32,7 @@ export const StyledMain = styled.main`
       font-size: 21px;
       width: 30%;
       display: block;
-      color: rgb(220 219 217);
+      color: rgb(187 187 187);
       opacity: 1;
       font-weight: 700;
       position: absolute;
@@ -44,9 +43,13 @@ export const StyledMain = styled.main`
 export const StyledFooter = styled.footer`
   height: 10vh;
   width: 100vw;
+  display: flex;
+  justify-content: center;
   color: #f11dd1d4;
-  background-color: #50506b;
+  background-color: #28093a;
   p {
+    align-self: center;
+
     margin: 0;
   }
 `;

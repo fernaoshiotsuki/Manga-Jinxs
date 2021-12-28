@@ -1,11 +1,15 @@
 import axios from "axios";
-import { useContext, useEffect } from "react";
-import { useState } from "react/cjs/react.development";
+import { useContext } from "react";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import Image from "../../components/displayPage";
+import { StyledHeader } from "../../components/Header/styles";
 import { MangaContext } from "../../Providers/Mangas";
+import { StyledFooter } from "../mangaChapters/styles";
 import { StyledDiv } from "./styles";
 const Home = () => {
+  const history = useHistory();
   const { manga } = useContext(MangaContext);
   const [coversState, setCoversState] = useState(false);
   const images = [];
@@ -44,6 +48,14 @@ const Home = () => {
     }
   };
 
-  return <StyledDiv>{coversState && <Image payload={images} />}</StyledDiv>;
+  return (
+    <>
+      <StyledHeader>
+        <button onClick={() => history.push("/")}> Home</button>
+      </StyledHeader>
+      <StyledDiv>{coversState && <Image payload={images} />}</StyledDiv>
+      <StyledFooter>@Shiotsuki-2021</StyledFooter>
+    </>
+  );
 };
 export default Home;
