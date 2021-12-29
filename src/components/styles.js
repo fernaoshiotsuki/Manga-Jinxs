@@ -21,10 +21,15 @@ export const StyledMain = styled.main`
     left: 20px;
     bottom: 100px;
     padding: 13px 20px;
+    border: solid 2px #1d1d6163;
     background-color: #1d1d6163;
     font-weight: 700;
     border-radius: 5px;
     width: 30%;
+  }
+  button:hover {
+    border: solid 2px #38ccff;
+    cursor: pointer;
   }
 
   @media screen and (min-width: 768px) {
@@ -51,5 +56,24 @@ export const StyledFooter = styled.footer`
     align-self: center;
 
     margin: 0;
+  }
+  button {
+    color: #38ccff;
+    /* position: absolute; */
+    border: none;
+    /* position: absolute; */
+    /* left: 20px; */
+    /* bottom: 100px; */
+    padding: 15px 25px;
+    background-color: #1d1d6163;
+    font-weight: 700;
+    border-radius: 5px;
+    /* width: 30%; */
+    align-self: center;
+    margin: 0px 20px;
+    border: solid 2px #1d1d6163;
+  }
+  button:hover {
+    border: solid 2px #38ccff;
   }
 `;

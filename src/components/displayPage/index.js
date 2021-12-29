@@ -14,13 +14,12 @@ const Image = ({ payload }) => {
       id: item.id,
     };
   });
-  console.log(mangaInfo[0]);
+
   return (
     <>
       {covers?.map((i, index) => {
         return (
           <CoverContainer handle={showChapters} id={mangaInfo[index].id}>
-            {" "}
             <img src={i.img}></img>
             {index}
           </CoverContainer>

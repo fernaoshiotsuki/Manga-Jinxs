@@ -54,7 +54,9 @@ const Home = () => {
         <button onClick={() => history.push("/")}> Home</button>
       </StyledHeader>
       <StyledDiv>{coversState && <Image payload={images} />}</StyledDiv>
-      <StyledFooter>@Shiotsuki-2021</StyledFooter>
+      <StyledFooter>
+        <p>@Shiotsuki-2021</p>
+      </StyledFooter>
     </>
   );
 };

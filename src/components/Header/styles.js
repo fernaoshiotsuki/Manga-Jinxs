@@ -17,4 +17,20 @@ export const StyledHeader = styled.header`
   h4 {
     margin-top: 37px;
   }
+  button {
+    color: #38ccff;
+    border: none;
+    padding: 15px 25px;
+    background-color: #1d1d6163;
+    font-weight: 700;
+    border: 2px #28093a solid;
+    border-radius: 5px;
+    align-self: center;
+    margin-left: 20px;
+  }
+  button:hover {
+    border: 2px #38ccff solid;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 `;

@@ -1,15 +1,21 @@
+import axios from "axios";
 import { useContext } from "react";
 import { MangaContext } from "../../Providers/Mangas";
-import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { StyledHeader } from "../../components/Header/styles";
+import { StyledFooter } from "../../components/styles";
+import { StyledPage } from "./styles";
+import { useHistory } from "react-router-dom";
+
 const MangaReader = () => {
+  const history = useHistory();
   const { data, url, getMangaPage } = useContext(MangaContext);
   const [page, setPage] = useState("");
   const [num, setNum] = useState(0);
   const [display, setDisplay] = useState(false);
 
-  const testURL = (num) => {
+  const getPageURL = (num) => {
     console.log(num);
     axios
       .get(`${url}/data/${data.attributes.hash}/${data.attributes.data[num]}`)
@@ -18,7 +24,6 @@ const MangaReader = () => {
         setPage(res.config.url);
       })
       .catch((err) => console.log(err));
-    console.log(data.attributes.data);
   };
 
   if (page === "") {
@@ -41,7 +46,7 @@ const MangaReader = () => {
 
   useEffect(() => {
     if (data.attributes) {
-      testURL(num);
+      getPageURL(num);
       setDisplay(true);
     }
   }, [data, handlePage, handlePageBefore]);
@@ -50,13 +55,25 @@ const MangaReader = () => {
     <>
       {data.attributes === undefined && <h2>Conteudo não encontrado :( </h2>}
       {display && (
-        <div>
-          <button onClick={() => handlePageBefore()}>Past</button>
-          <img src={page} alt="image"></img>
-          {num}
+        <>
+          <StyledHeader>
+            <button onClick={() => history.push("/")}>Home</button>
+            <button onClick={() => history.push("/manga")}>Mangas</button>
+            <button onClick={() => history.push("/manga/chapters")}>
+              Capitulos
+            </button>
+          </StyledHeader>
 
-          <button onClick={() => handlePage()}>next</button>
-        </div>
+          <StyledPage>
+            <img src={page} alt="image"></img>
+          </StyledPage>
+
+          <StyledFooter>
+            <button onClick={() => handlePageBefore()}>Past</button>
+            <p>{num}</p>
+            <button onClick={() => handlePage()}>next</button>
+          </StyledFooter>
+        </>
       )}
     </>
   );
