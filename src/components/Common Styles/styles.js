@@ -59,16 +59,11 @@ export const StyledFooter = styled.footer`
   }
   button {
     color: #38ccff;
-    /* position: absolute; */
     border: none;
-    /* position: absolute; */
-    /* left: 20px; */
-    /* bottom: 100px; */
     padding: 15px 25px;
     background-color: #1d1d6163;
     font-weight: 700;
     border-radius: 5px;
-    /* width: 30%; */
     align-self: center;
     margin: 0px 20px;
     border: solid 2px #1d1d6163;

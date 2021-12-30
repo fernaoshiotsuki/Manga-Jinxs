@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import ChapterContainer from "../../components/coverContainer/chapterContainer";
 import { MangaContext } from "../../Providers/Mangas";
+import ChapterContainer from "../../components/CoverContainer/chapterContainer";
 import {
   StyledChapterContainer,
   StyledChapterHeader,
@@ -13,31 +13,29 @@ import {
 const ChaptersList = () => {
   const history = useHistory();
   const { chapters, getMangaChapter } = useContext(MangaContext);
+  const coverList = JSON.parse(localStorage.getItem("coverImages"));
+  const mangaData = JSON.parse(localStorage.getItem("mangaData")) || "";
   const allChapters = [];
   const list = Object.values(chapters);
-
-  const mangaData = JSON.parse(localStorage.getItem("mangaData")) || null;
-  console.log(mangaData);
 
   list.map((chap) => {
     return Object.values(chap.chapters).map((i) => {
       return allChapters.push(i);
     });
   });
+
   allChapters.sort((a, b) => {
     return a.chapter - b.chapter;
   });
-  console.log(allChapters);
+
   const handle = (chapterId) => {
     getMangaChapter(chapterId);
   };
 
-  const coverList = JSON.parse(localStorage.getItem("coverImages"));
   const ThisCover = coverList.filter((coverImg) => {
     return coverImg.img.includes(mangaData.id);
   });
 
-  console.log(ThisCover[0]);
   return (
     <>
       <StyledChapterHeader>
@@ -48,13 +46,14 @@ const ChaptersList = () => {
       </StyledChapterHeader>
 
       <StyledMain>
-        <div>{ThisCover && <img src={ThisCover[0].img}></img>}</div>
+        <div>
+          {ThisCover && <img src={ThisCover[0].img} alt="coverImg"></img>}
+        </div>
         <StyledChapterContainer>
           {allChapters?.map((i) => {
             return (
               <ChapterContainer id={i.id} handle={handle}>
-                {" "}
-                Chapter {i.chapter}
+                Capitulo {i.chapter}
               </ChapterContainer>
             );
           })}

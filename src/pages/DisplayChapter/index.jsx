@@ -3,8 +3,8 @@ import { useContext } from "react";
 import { MangaContext } from "../../Providers/Mangas";
 import { useState } from "react";
 import { useEffect } from "react";
-import { StyledHeader } from "../../components/Header/styles";
-import { StyledFooter } from "../../components/styles";
+import { StyledHeader } from "../../components/HeaderStyle/styles";
+import { StyledFooter } from "../../components/Common Styles/styles";
 import { StyledPage } from "./styles";
 import { useHistory } from "react-router-dom";
 
@@ -16,11 +16,9 @@ const MangaReader = () => {
   const [display, setDisplay] = useState(false);
 
   const getPageURL = (num) => {
-    console.log(num);
     axios
       .get(`${url}/data/${data.attributes.hash}/${data.attributes.data[num]}`)
       .then((res) => {
-        console.log(res.config.url);
         setPage(res.config.url);
       })
       .catch((err) => console.log(err));
@@ -42,6 +40,7 @@ const MangaReader = () => {
     if (data.id) {
       getMangaPage(data.id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   useEffect(() => {
@@ -49,11 +48,11 @@ const MangaReader = () => {
       getPageURL(num);
       setDisplay(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, handlePage, handlePageBefore]);
-  console.log(data);
+
   return (
     <>
-      {data.attributes === undefined && <h2>Conteudo não encontrado :( </h2>}
       {display && (
         <>
           <StyledHeader>
@@ -65,13 +64,13 @@ const MangaReader = () => {
           </StyledHeader>
 
           <StyledPage>
-            <img src={page} alt="image"></img>
+            <img src={page} alt="MangaPage"></img>
           </StyledPage>
 
           <StyledFooter>
             <button onClick={() => handlePageBefore()}>Past</button>
             <p>{num}</p>
-            <button onClick={() => handlePage()}>next</button>
+            <button onClick={() => handlePage()}>Next</button>
           </StyledFooter>
         </>
       )}

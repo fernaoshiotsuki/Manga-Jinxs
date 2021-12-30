@@ -3,16 +3,18 @@ import { useContext } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import Image from "../../components/displayPage";
-import { StyledHeader } from "../../components/Header/styles";
+import Image from "../../components/CoverImage";
+import { StyledHeader } from "../../components/HeaderStyle/styles";
 import { MangaContext } from "../../Providers/Mangas";
-import { StyledFooter } from "../mangaChapters/styles";
+import { StyledFooter } from "../MangaChaptersList/styles";
 import { StyledDiv } from "./styles";
-const Home = () => {
+
+const MangasDisplay = () => {
   const history = useHistory();
   const { manga } = useContext(MangaContext);
   const [coversState, setCoversState] = useState(false);
   const images = [];
+  const ids = [];
 
   const mangaInfo = manga.map((item) => {
     return {
@@ -27,8 +29,6 @@ const Home = () => {
     axios
       .get(`https://api.mangadex.org/cover/${coverId}`)
       .then((res) => {
-        console.log(res.data.data.attributes.fileName);
-
         coverImg(id, res.data.data.attributes.fileName);
       })
       .catch((err) => console.log(err));
@@ -42,8 +42,10 @@ const Home = () => {
     images.push({
       img: `https://uploads.mangadex.org/covers/${id}/${cover}.256.jpg`,
     });
+    ids.push(id);
     if (images.length === 10) {
       localStorage.setItem("coverImages", JSON.stringify(images));
+      localStorage.setItem("mangasId", JSON.stringify(ids));
       setCoversState(true);
     }
   };
@@ -53,11 +55,13 @@ const Home = () => {
       <StyledHeader>
         <button onClick={() => history.push("/")}> Home</button>
       </StyledHeader>
+
       <StyledDiv>{coversState && <Image payload={images} />}</StyledDiv>
+
       <StyledFooter>
         <p>@Shiotsuki-2021</p>
       </StyledFooter>
     </>
   );
 };
-export default Home;
+export default MangasDisplay;

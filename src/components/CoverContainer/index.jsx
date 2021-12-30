@@ -9,7 +9,6 @@ const CoverContainer = ({ children, handle, id }) => {
     api
       .get(`manga/${id}`)
       .then((res) => {
-        console.log(res.data);
         localStorage.setItem("mangaData", JSON.stringify(res.data.data));
       })
       .catch((err) => console.log(err));

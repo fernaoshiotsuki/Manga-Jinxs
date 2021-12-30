@@ -1,27 +1,22 @@
 import { useContext } from "react/cjs/react.development";
 import { MangaContext } from "../../Providers/Mangas";
-import CoverContainer from "../coverContainer";
+import CoverContainer from "../CoverContainer";
 
-const Image = ({ payload }) => {
+const Image = () => {
   const covers = JSON.parse(localStorage.getItem("coverImages"));
-  console.log(payload);
-  const { getMangaList, manga } = useContext(MangaContext);
+  const mangaIds = JSON.parse(localStorage.getItem("mangasId"));
+  const { getMangaList } = useContext(MangaContext);
+
   const showChapters = (mangaid) => {
     getMangaList(mangaid);
   };
-  const mangaInfo = manga.map((item) => {
-    return {
-      id: item.id,
-    };
-  });
 
   return (
     <>
       {covers?.map((i, index) => {
         return (
-          <CoverContainer handle={showChapters} id={mangaInfo[index].id}>
-            <img src={i.img}></img>
-            {index}
+          <CoverContainer handle={showChapters} id={mangaIds[index]}>
+            <img src={i.img} alt="cover"></img>
           </CoverContainer>
         );
       })}

@@ -10,12 +10,8 @@ export const StyledHeader = styled.header`
   h4 {
     margin: 0;
   }
-  h2 {
-    margin: 20px;
-    font-size: 35px;
-  }
   h4 {
-    margin-top: 37px;
+    margin: 7px;
   }
   button {
     color: #38ccff;
@@ -32,5 +28,15 @@ export const StyledHeader = styled.header`
     border: 2px #38ccff solid;
     border-radius: 5px;
     cursor: pointer;
+  }
+
+  @media screen and (min-width: 768px) {
+    h2 {
+      margin: 20px;
+      font-size: 35px;
+    }
+    h4 {
+      margin-top: 37px;
+    }
   }
 `;
