@@ -5,5 +5,6 @@ export const StyledPage = styled.div`
   background-color: black;
   img {
     height: 100%;
+    max-width: 100%;
   }
 `;

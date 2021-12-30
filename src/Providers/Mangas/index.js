@@ -1,10 +1,12 @@
 import { createContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import api from "../../services";
 
 export const MangaContext = createContext();
 
 export const MangaProvider = ({ children }) => {
+  const history = useHistory();
   const [manga, setManga] = useState([]);
   const [chapters, setChapters] = useState([]);
   const [url, setUrl] = useState("");
@@ -36,6 +38,7 @@ export const MangaProvider = ({ children }) => {
       .then((res) => {
         setData(res.data.data);
       })
+      .then(() => history.push("/manga/reader"))
       .catch((err) => console.log(err));
   };
 

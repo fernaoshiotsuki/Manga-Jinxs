@@ -11,8 +11,8 @@ const CoverContainer = ({ children, handle, id }) => {
       .then((res) => {
         localStorage.setItem("mangaData", JSON.stringify(res.data.data));
       })
+      .then(() => history.push("/manga/chapters"))
       .catch((err) => console.log(err));
-    history.push("/manga/chapters");
   };
 
   return <div onClick={() => handleClick()}>{children}</div>;

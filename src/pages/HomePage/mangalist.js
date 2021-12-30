@@ -1,4 +1,4 @@
-import { useContext } from "react/";
+import { useContext } from "react";
 import { MangaContext } from "../../Providers/Mangas";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom/";

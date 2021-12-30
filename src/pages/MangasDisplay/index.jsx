@@ -35,6 +35,7 @@ const MangasDisplay = () => {
   };
 
   mangaInfo.map((obj) => {
+    console.log(obj.cover[0].id);
     return getCover(obj.id, obj.cover[0].id);
   });
 

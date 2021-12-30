@@ -14,7 +14,7 @@ const ChaptersList = () => {
   const history = useHistory();
   const { chapters, getMangaChapter } = useContext(MangaContext);
   const coverList = JSON.parse(localStorage.getItem("coverImages"));
-  const mangaData = JSON.parse(localStorage.getItem("mangaData")) || "";
+  const mangaData = JSON.parse(localStorage.getItem("mangaData") || "");
   const allChapters = [];
   const list = Object.values(chapters);
 

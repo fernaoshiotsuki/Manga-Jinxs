@@ -1,4 +1,4 @@
-import { useContext } from "react/cjs/react.development";
+import { useContext } from "react";
 import { MangaContext } from "../../Providers/Mangas";
 import CoverContainer from "../CoverContainer";
 

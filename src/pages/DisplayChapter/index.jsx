@@ -24,11 +24,6 @@ const MangaReader = () => {
       .catch((err) => console.log(err));
   };
 
-  if (page === "") {
-    setPage(
-      "https://studiosol-a.akamaihd.net/uploadfile/letras/fotos/2/c/1/9/2c192dc4d06895bda3f2190ff32a04ca.jpg"
-    );
-  }
   const handlePage = () => {
     setNum(num + 1);
   };
@@ -64,7 +59,14 @@ const MangaReader = () => {
           </StyledHeader>
 
           <StyledPage>
-            <img src={page} alt="MangaPage"></img>
+            {page ? (
+              <img src={page} alt="MangaPage"></img>
+            ) : (
+              <img
+                src="https://i.pinimg.com/564x/8a/1d/4c/8a1d4c89eca6dbf42f84fab747f8ff8e.jpg"
+                alt="MangaPage"
+              ></img>
+            )}
           </StyledPage>
 
           <StyledFooter>
